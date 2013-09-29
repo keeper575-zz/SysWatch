@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd ~/gaurav/SysWatch
+#cd ~/gaurav/SysWatch
 
 exec $SHELL
