@@ -1,0 +1,45 @@
+diff --git run.sh run.sh
+index 3c5b252..fd30887 100755
+--- run.sh
++++ run.sh
+@@ -1,21 +1,28 @@
+ #!/bin/sh
+-var1="date"
++var1="journalctl -kf -o cat"
+ var2="watch sensors"
+-var3="tail -f /var/log/syslog"
++var3="journalctl -fu scan"
++var4="htop"
+ 
+ tmux new-session -d -s SysWatch 'exec sys'
++#tmux select-window -t SysWatch:0
++#tmux rename-window 'SYS'
+ 
+ tmux send-keys "$var1" 'C-m'
+-
+-tmux select-window -t SysWatch:0
+-tmux rename-window 'SYS'
+-
+-tmux split-window -h #'exec sys'
+-
+-tmux send-keys "$var2" 'C-m'
++sleep 1
+ tmux split-window -v -t 0 #'exec sys'
+-
++sleep 1
+ tmux send-keys "$var3" 'C-m'
+-tmux split-window -v -t 1 #'exec sys'
++sleep 1
++tmux split-window -h -t 0 #'exec sys'
++sleep 1
++
++tmux send-keys "$var4" 'C-m'
++sleep 1
++#tmux split-window -v -t 1 #'exec sys'
++#sleep 2
+ 
+-tmux -2 attach-session -t SysWatch
++tmux split-window -v -t 2 #'exec sys'
++sleep 1
++tmux send-keys "$var2" 'C-m'
++#tmux -2 attach-session -t SysWatch
